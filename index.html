@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calc</title>
+
+    <link rel="stylesheet" href="styles/main.css">
+
+</head>
+<body>
+
+<div class="calc-body" id="calc">
+    <div>
+        <div class="calc-display">
+            <div class="calc-display-formula">
+
+            </div>
+            <div class="calc-display-result">
+                0
+            </div>
+        </div>
+        <div class="calc-memory-controls">
+            <span class="disabled">MC</span>
+            <span class="disabled">MR</span>
+            <span>M+</span>
+            <span>M-</span>
+            <span>MS</span>
+            <span class="disabled">M*</span>
+        </div>
+        <div class="calc-buttons">
+            <table>
+                <tr>
+                    <td onclick="calc.addOperation('%');">%</td>
+                    <td onclick="calc.addOperation('sqrt');">&radic;</td>
+                    <td onclick="calc.addOperation('sqr');">x<sup>2</sup></td>
+                    <td onclick="calc.addOperation('1/x');"><sup>1</sup>&frasl;<sub>x</sub></td>
+                </tr>
+                <tr>
+                    <td onclick="calc.clearEntry();">CE</td>
+                    <td onclick="calc.clearData();">C</td>
+                    <td onclick="calc.removeDigit();"><img src="images/bs.png" alt=""></td>
+                    <td onclick="calc.addOperation('/');">&divide;</td>
+                </tr>
+                <tr>
+                    <td class="calc-buttons-numbers" onclick="calc.addDigit(7);">7</td>
+                    <td class="calc-buttons-numbers" onclick="calc.addDigit(8);">8</td>
+                    <td class="calc-buttons-numbers" onclick="calc.addDigit(9);">9</td>
+                    <td onclick="calc.addOperation('*');">&times;</td>
+                </tr>
+                <tr>
+                    <td class="calc-buttons-numbers" onclick="calc.addDigit(4);">4</td>
+                    <td class="calc-buttons-numbers" onclick="calc.addDigit(5);">5</td>
+                    <td class="calc-buttons-numbers" onclick="calc.addDigit(6);">6</td>
+                    <td onclick="calc.addOperation('-');">-</td>
+                </tr>
+                <tr>
+                    <td class="calc-buttons-numbers" onclick="calc.addDigit(1);">1</td>
+                    <td class="calc-buttons-numbers" onclick="calc.addDigit(2);">2</td>
+                    <td class="calc-buttons-numbers" onclick="calc.addDigit(3);">3</td>
+                    <td onclick="calc.addOperation('+');">+</td>
+                </tr>
+                <tr>
+                    <td onclick="calc.negate();">&plusmn;</td>
+                    <td class="calc-buttons-numbers" onclick="calc.addDigit(0);">0</td>
+                    <td onclick="calc.addComma();">,</td>
+                    <td onclick="calc.equate();">=</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="js/calc.js"></script>
+</body>
+</html>
