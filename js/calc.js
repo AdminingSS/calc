@@ -75,10 +75,13 @@ class Calculator {
                     this.formula = '';
                     this.operation = "+";
                     this.refreshDisplays();
+                    //this.input = '0';
+                    this.opFlag = 0;
                     break;
                 default:
                     this.process(op);
                     this.calculate();
+                    this.formula += '=';
                     this.refreshDisplays();
                     this.result = 0;
                     break;
