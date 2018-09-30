@@ -9,7 +9,7 @@ class Calculator {
         this.inputLast = 0; //предыдущее введенное
         this.input = '0'; //текущее введенное
         this.operation = '+';
-        this.opFlag = 0;
+        //this.opFlag = 0;
     }
 
     refreshDisplays() {
@@ -25,9 +25,8 @@ class Calculator {
         }
     }
 
-
     calculate() {
-        if(!this.opFlag) {
+        //if(!this.opFlag) {
             switch (this.operation) {
                 case '+':
                     this.result += +this.input;
@@ -44,7 +43,7 @@ class Calculator {
                 default:
                     break;
             }
-        }
+        //}
     }
 
     addOperation(op) {
@@ -98,20 +97,20 @@ class Calculator {
             default:
                 break;
         }
-        this.opFlag = 0;
+        //this.opFlag = 0;
     }
 
     addDigit(digit) {
         if (!isNaN(digit)) {
             (this.input === '0') ? this.input = '' + digit : this.input += '' + digit;
-            this.opFlag = 0;
+            //this.opFlag = 0;
         }
         this.refreshDisplays();
     }
 
     addComma() {
         if (!~this.input.indexOf('.')) this.input += '.';
-        this.opFlag = 0;
+        //this.opFlag = 0;
         this.refreshDisplays();
     }
 
@@ -139,17 +138,18 @@ class Calculator {
         this.formula = '';
         this.result = 0;
         this.input = '0';
-        this.opFlag = 0;
+        //this.opFlag = 0;
         this.refreshDisplays();
     }
 
     equate() {
         this.calculate();
         this.input = '' + this.result;
+        this.result = 0;
         this.formula = '';
         this.refreshDisplays();
         this.formula = this.input;
-        this.opFlag = 0;
+        //this.opFlag = 0;
     }
 }
 
