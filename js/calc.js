@@ -75,7 +75,7 @@ class Calculator {
                     break;
                 default:
                     this.process(op);
-                    //this.calculate();
+                    this.calculate();
                     break;
             }
             this.refreshDisplays();
