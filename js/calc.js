@@ -65,6 +65,8 @@ class Calculator {
 
                     this.inputLast = this.input;
                     this.input = '' + this.result;
+                    this.refreshDisplays();
+                    this.input = '';
                     break;
                 case '=':
                     this.calculate();
@@ -72,14 +74,17 @@ class Calculator {
                     this.result = 0;
                     this.formula = '';
                     this.operation = "+";
+                    this.refreshDisplays();
                     break;
                 default:
                     this.process(op);
                     this.calculate();
+                    this.refreshDisplays();
+                    this.result = 0;
                     break;
             }
-            this.refreshDisplays();
-            if(op !== '=') this.input = '';
+            //this.refreshDisplays();
+            //if(op !== '=') this.input = '';
     }
 
     process(op) {
@@ -90,7 +95,7 @@ class Calculator {
                 break;
             case 'sqr':
                 this.formula += 'sqr(' + this.input + ')';
-                this.input = '' + (+this.input * +this.input);
+                this.input = '' + (Math.pow(+this.input,2));
                 break;
             case 'sqrt':
                 this.formula += 'sqrt(' + this.input + ')';
