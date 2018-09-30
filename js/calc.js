@@ -146,10 +146,11 @@ class Calculator {
         if(this.clear === 1) {
             this.input = '0';
             this.clear = 0;
+            this.inputLast =0;
         }
         if (!isNaN(digit)) {
             (this.input === '0') ? this.input = '' + digit : this.input += '' + digit;
-            this.inputLast =0;
+
             this.opFlag = 0;
         }
         this.refreshDisplays();
@@ -192,6 +193,7 @@ class Calculator {
         this.opFlag = 0;
         this.equateFlag = 0;
         this.inputLast = 0;
+        this.operation = '+';
         this.refreshDisplays();
     }
 
