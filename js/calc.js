@@ -61,7 +61,7 @@ class Calculator {
                     }
                     else {
                         this.formula += this.input + ' ' + this.operation + ' ';
-                        this.opFlag = 1;
+                        //this.opFlag = 1;
                     }
 
                     this.inputLast = this.input;
@@ -148,7 +148,7 @@ class Calculator {
         this.result = 0;
         this.formula = '';
         this.refreshDisplays();
-        this.formula = this.input;
+        //this.formula = this.input;
         //this.opFlag = 0;
     }
 }
