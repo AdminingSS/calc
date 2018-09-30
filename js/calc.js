@@ -55,17 +55,24 @@ class Calculator {
                 case '/':
                     this.calculate();
                     this.operation = op;
-                    if(this.opFlag) {
-                        this.formula = this.formula.slice(0,-2);
-                        this.formula += this.operation + ' ';
-                    }
-                    else {
+                    // if(this.opFlag) {
+                    //     this.formula = this.formula.slice(0,-2);
+                    //     this.formula += this.operation + ' ';
+                    // }
+                    // else {
                         this.formula += this.input + ' ' + this.operation + ' ';
                         //this.opFlag = 1;
-                    }
+                    //}
 
                     this.inputLast = this.input;
                     this.input = '' + this.result;
+                    break;
+                case '=':
+                    this.calculate();
+                    this.input = '' + this.result;
+                    this.result = 0;
+                    this.formula = '';
+                    this.operation = "+";
                     break;
                 default:
                     this.process(op);
@@ -73,7 +80,17 @@ class Calculator {
                     break;
             }
             this.refreshDisplays();
-            this.input = '';
+            if(op !== '=') this.input = '';
+    }
+
+    equate() {
+        this.calculate();
+        this.input = '' + this.result;
+        this.result = 0;
+        this.formula = '';
+        this.refreshDisplays();
+        //this.formula = this.input;
+        //this.opFlag = 0;
     }
 
     process(op) {
@@ -142,15 +159,6 @@ class Calculator {
         this.refreshDisplays();
     }
 
-    equate() {
-        this.calculate();
-        this.input = '' + this.result;
-        this.result = 0;
-        this.formula = '';
-        this.refreshDisplays();
-        //this.formula = this.input;
-        //this.opFlag = 0;
-    }
 }
 
 const calc = new Calculator('calc');
