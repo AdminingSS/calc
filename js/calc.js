@@ -75,7 +75,8 @@ class Calculator {
                         this.opFlag = 1;
                     }
 
-                    //this.inputLast = this.input;
+                    this.inputLast = +this.input;
+                    //alert(this.inputLast);
                     this.input = '' + this.result;
                     this.refreshDisplays();
                     this.input = '';
@@ -89,7 +90,7 @@ class Calculator {
                         break;
                     }
                     this.calculate();
-                    this.inputLast = +this.input;
+                    this.inputLast = this.inputLast || +this.input;
                     this.equateFlag = 1;
                     this.input = '' + this.result;
                     //this.result = 0;
@@ -148,6 +149,7 @@ class Calculator {
         }
         if (!isNaN(digit)) {
             (this.input === '0') ? this.input = '' + digit : this.input += '' + digit;
+            this.inputLast =0;
             this.opFlag = 0;
         }
         this.refreshDisplays();
@@ -189,6 +191,7 @@ class Calculator {
         this.input = '0';
         this.opFlag = 0;
         this.equateFlag = 0;
+        this.inputLast = 0;
         this.refreshDisplays();
     }
 
