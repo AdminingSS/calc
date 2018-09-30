@@ -7,10 +7,10 @@ class Calculator {
         this.formula = '';
         this.result = 0; //посчитанное
         this.inputLast = 0; //предыдущее введенное
-        this.equateFlag = 0;
         this.input = '0'; //текущее введенное
         this.operation = '+';
         this.opFlag = 0;
+        this.equateFlag = 0;
         this.clear = 0;
     }
 
@@ -154,6 +154,10 @@ class Calculator {
     }
 
     addComma() {
+        if(this.clear === 1) {
+            this.input = '0';
+            this.clear = 0;
+        }
         if (!~this.input.indexOf('.')) this.input += '.';
         this.opFlag = 0;
         this.refreshDisplays();
@@ -168,7 +172,7 @@ class Calculator {
     }
 
     negate() {
-        if(this.input) {
+        if(this.input != 0) {
             (~this.input.indexOf('-')) ? this.input = this.input.slice(1) : this.input = '-' + this.input;
             this.refreshDisplays();
         }
@@ -183,7 +187,8 @@ class Calculator {
         this.formula = '';
         this.result = 0;
         this.input = '0';
-        //this.opFlag = 0;
+        this.opFlag = 0;
+        this.equateFlag = 0;
         this.refreshDisplays();
     }
 
