@@ -10,6 +10,7 @@ class Calculator {
         this.input = '0'; //текущее введенное
         this.operation = '+';
         this.opFlag = 0;
+        this.clear = 0;
     }
 
     refreshDisplays() {
@@ -76,6 +77,7 @@ class Calculator {
                     this.operation = "+";
                     this.refreshDisplays();
                     //this.input = '0';
+                    this.clear = 1;
                     this.opFlag = 0;
                     break;
                 default:
@@ -115,6 +117,10 @@ class Calculator {
     }
 
     addDigit(digit) {
+        if(this.clear === 1) {
+            this.input = '0';
+            this.clear = 0;
+        }
         if (!isNaN(digit)) {
             (this.input === '0') ? this.input = '' + digit : this.input += '' + digit;
             this.opFlag = 0;
