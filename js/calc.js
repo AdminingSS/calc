@@ -7,6 +7,7 @@ class Calculator {
         this.formula = '';
         this.result = 0; //посчитанное
         this.inputLast = 0; //предыдущее введенное
+        this.equateFlag = 0;
         this.input = '0'; //текущее введенное
         this.operation = '+';
         this.opFlag = 0;
@@ -48,11 +49,21 @@ class Calculator {
     }
 
     addOperation(op) {
+        // if(this.equateFlag === 1) {
+        //     this.result = 0;
+        //     this.operation = "+";
+        //     this.equateFlag = 0;
+        // }
             switch (op) {
                 case '+':
                 case '-':
                 case '*':
                 case '/':
+                    if(this.equateFlag === 1) {
+                        this.result = 0;
+                        this.operation = "+";
+                        this.equateFlag = 0;
+                    }
                     this.calculate();
                     this.operation = op;
                     if(this.opFlag) {
@@ -64,23 +75,37 @@ class Calculator {
                         this.opFlag = 1;
                     }
 
-                    this.inputLast = this.input;
+                    //this.inputLast = this.input;
                     this.input = '' + this.result;
                     this.refreshDisplays();
                     this.input = '';
                     break;
                 case '=':
+                    if(this.equateFlag === 1) {
+                        this.result = this.inputLast;
+                        this.calculate();
+                        this.input = '' + this.result;
+                        this.refreshDisplays();
+                        break;
+                    }
                     this.calculate();
+                    this.inputLast = +this.input;
+                    this.equateFlag = 1;
                     this.input = '' + this.result;
-                    this.result = 0;
+                    //this.result = 0;
                     this.formula = '';
-                    this.operation = "+";
+                    //this.operation = "+";
                     this.refreshDisplays();
                     //this.input = '0';
                     this.clear = 1;
                     this.opFlag = 0;
                     break;
                 default:
+                    if(this.equateFlag === 1) {
+                        this.result = 0;
+                        this.operation = "+";
+                        this.equateFlag = 0;
+                    }
                     this.process(op);
                     this.calculate();
                     this.formula += '=';
