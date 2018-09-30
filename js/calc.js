@@ -9,24 +9,24 @@ class Calculator {
         this.inputLast = 0; //предыдущее введенное
         this.input = '0'; //текущее введенное
         this.operation = '+';
-        //this.opFlag = 0;
+        this.opFlag = 0;
     }
 
     refreshDisplays() {
-        this.inputDisplay.innerHTML = formatComma(this.input);
-        this.formulaDisplay.innerHTML = formatComma(this.formula);
+        this.inputDisplay.innerHTML = this.formatComma(this.input);
+        this.formulaDisplay.innerHTML = this.formatComma(this.formula);
+    }
 
-        function formatComma(str) {
-            let newString = str.slice();
-            while (~newString.indexOf('.')) {
-                newString = newString.replace('.', ',');
-            }
-            return newString;
+    formatComma(str) {
+        let newString = str.slice();
+        while (~newString.indexOf('.')) {
+            newString = newString.replace('.', ',');
         }
+        return newString;
     }
 
     calculate() {
-        //if(!this.opFlag) {
+        if(!this.opFlag) {
             switch (this.operation) {
                 case '+':
                     this.result += +this.input;
@@ -43,11 +43,10 @@ class Calculator {
                 default:
                     break;
             }
-        //}
+        }
     }
 
     addOperation(op) {
-
             switch (op) {
                 case '+':
                 case '-':
@@ -55,14 +54,14 @@ class Calculator {
                 case '/':
                     this.calculate();
                     this.operation = op;
-                    // if(this.opFlag) {
-                    //     this.formula = this.formula.slice(0,-2);
-                    //     this.formula += this.operation + ' ';
-                    // }
-                    // else {
+                    if(this.opFlag) {
+                        this.formula = this.formula.slice(0,-2);
+                        this.formula += this.operation + ' ';
+                    }
+                    else {
                         this.formula += this.input + ' ' + this.operation + ' ';
-                        //this.opFlag = 1;
-                    //}
+                        this.opFlag = 1;
+                    }
 
                     this.inputLast = this.input;
                     this.input = '' + this.result;
@@ -76,21 +75,11 @@ class Calculator {
                     break;
                 default:
                     this.process(op);
-                    this.calculate();
+                    //this.calculate();
                     break;
             }
             this.refreshDisplays();
             if(op !== '=') this.input = '';
-    }
-
-    equate() {
-        this.calculate();
-        this.input = '' + this.result;
-        this.result = 0;
-        this.formula = '';
-        this.refreshDisplays();
-        //this.formula = this.input;
-        //this.opFlag = 0;
     }
 
     process(op) {
@@ -114,20 +103,20 @@ class Calculator {
             default:
                 break;
         }
-        //this.opFlag = 0;
+        this.opFlag = 0;
     }
 
     addDigit(digit) {
         if (!isNaN(digit)) {
             (this.input === '0') ? this.input = '' + digit : this.input += '' + digit;
-            //this.opFlag = 0;
+            this.opFlag = 0;
         }
         this.refreshDisplays();
     }
 
     addComma() {
         if (!~this.input.indexOf('.')) this.input += '.';
-        //this.opFlag = 0;
+        this.opFlag = 0;
         this.refreshDisplays();
     }
 
