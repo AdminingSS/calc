@@ -46,6 +46,7 @@ class Calculator {
                 default:
                     break;
             }
+            this.result = +this.result.toFixed(11);
         }
     }
 
