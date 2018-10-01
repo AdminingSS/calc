@@ -6,6 +6,7 @@ class Calculator {
         this.formulaDisplay = this.calcElem.querySelector('.calc-display-formula');
         this.formula = '';
         this.result = 0; //посчитанное
+        this.resultLast = 0;
         this.inputLast = 0; //предыдущее введенное
         this.input = '0'; //текущее введенное
         this.operation = '+';
@@ -49,11 +50,6 @@ class Calculator {
     }
 
     addOperation(op) {
-        // if(this.equateFlag === 1) {
-        //     this.result = 0;
-        //     this.operation = "+";
-        //     this.equateFlag = 0;
-        // }
             switch (op) {
                 case '+':
                 case '-':
@@ -76,28 +72,25 @@ class Calculator {
                     }
 
                     this.inputLast = +this.input;
-                    //alert(this.inputLast);
                     this.input = '' + this.result;
                     this.refreshDisplays();
                     this.input = '';
                     break;
                 case '=':
                     if(this.equateFlag === 1) {
-                        this.result = this.inputLast;
+                        this.result = +this.input;
+                        this.input = '' + this.inputLast;
                         this.calculate();
                         this.input = '' + this.result;
                         this.refreshDisplays();
                         break;
                     }
                     this.calculate();
-                    this.inputLast = this.inputLast || +this.input;
+                    this.inputLast = +this.input || this.inputLast;
                     this.equateFlag = 1;
                     this.input = '' + this.result;
-                    //this.result = 0;
                     this.formula = '';
-                    //this.operation = "+";
                     this.refreshDisplays();
-                    //this.input = '0';
                     this.clear = 1;
                     this.opFlag = 0;
                     break;
@@ -108,14 +101,13 @@ class Calculator {
                         this.equateFlag = 0;
                     }
                     this.process(op);
-                    this.calculate();
-                    this.formula += '=';
+                    this.resultLast = this.resultLast || this.result;
+                    if(op != '%') this.calculate();
+                    if(op != '%') this.formula += '=';
                     this.refreshDisplays();
-                    this.result = 0;
+                    if(op != '%') this.result = 0;
                     break;
             }
-            //this.refreshDisplays();
-            //if(op !== '=') this.input = '';
     }
 
     process(op) {
@@ -133,6 +125,8 @@ class Calculator {
                 this.input = '' + (Math.sqrt(+this.input));
                 break;
             case '%':
+                this.result = this.result || this.resultLast;
+                this.resultLast = 0;
                 this.input = '' + (this.result * +this.input / 100);
                 this.formula += '' + this.input;
                 break;
