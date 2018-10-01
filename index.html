@@ -20,11 +20,11 @@
             </div>
         </div>
         <div class="calc-memory-controls">
-            <span class="disabled">MC</span>
-            <span class="disabled">MR</span>
-            <span>M+</span>
-            <span>M-</span>
-            <span>MS</span>
+            <span class="disabled" onclick="calc.accessMemory('clear');">MC</span>
+            <span class="disabled" onclick="calc.accessMemory('show');">MR</span>
+            <span onclick="calc.accessMemory('add');">M+</span>
+            <span onclick="calc.accessMemory('sub');">M-</span>
+            <span onclick="calc.accessMemory('save');">MS</span>
             <span class="disabled">M*</span>
         </div>
         <div class="calc-buttons">

@@ -13,7 +13,71 @@ class Calculator {
         this.opFlag = 0;
         this.equateFlag = 0;
         this.clear = 0;
+
+        //memory module
+        this.memory = 0;
+        this.memoryElems = this.calcElem.querySelectorAll('.disabled');
+        this.memoryControls = 0;
     }
+
+    activateMemoryControls (flag) {
+        if(flag) {
+            this.memoryElems.forEach(function (item) {
+                item.classList.remove('disabled');
+            })
+            this.memoryControls = 1;
+        }
+        else {
+            this.memoryElems.forEach(function (item) {
+                item.classList.add('disabled');
+            })
+            this.memoryControls = 0;
+        }
+    }
+
+    accessMemory (op) {
+        var tempInput;
+
+        if(this.input !== ''){
+            tempInput = +this.input
+        }
+        else {
+            tempInput = this.result;
+        }
+
+        switch(op) {
+            case 'save':
+                this.memory = tempInput;
+                this.activateMemoryControls(true);
+                break;
+            case 'add':
+                this.memory += tempInput;
+                this.activateMemoryControls(true);
+                break;
+            case 'sub':
+                this.memory -= tempInput;
+                this.activateMemoryControls(true);
+                break;
+            case 'show':
+                if(this.memoryControls) {
+                this.formula = '';
+                this.input = '' + this.memory;
+                this.refreshDisplays();
+                this.input = '';
+                }
+                break;
+            case 'clear':
+                this.memory = 0;
+                this.activateMemoryControls(false);
+                break;
+            default:
+                break;
+        }
+
+
+    }
+
+
 
     refreshDisplays() {
         this.inputDisplay.innerHTML = this.formatComma(this.input);
